@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace RPSLizardSpock
 {
-    class AI:Player
+    public class AI:Player
     {
+        public Random computerMove = new Random();
         public AI()
         {
             NameThePlayer(); 
@@ -16,9 +17,10 @@ namespace RPSLizardSpock
         {
             playerName = "Hal9000";
         }
-        public override void SelectYourMove()
+        public override int SelectYourMove()
         {
-
+            
+            return computerMove.Next(5);
         }
     }
 }

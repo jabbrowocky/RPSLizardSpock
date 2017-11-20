@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace RPSLizardSpock
 {
-    abstract class Player
+    public abstract class Player
     {
+        public string defaultHumanName;
         public string playerName;
         public int playerChoice;
-        public int PlayerWinTally;
+        public int playerWinTally = 0;
 
 
         public Player()
@@ -19,13 +20,13 @@ namespace RPSLizardSpock
         }
         virtual public void NameThePlayer()
         {
-            Console.WriteLine("What is the name of your player?");
+            Console.WriteLine("{0} what is your name?", defaultHumanName);
             playerName = Console.ReadLine();
         }
-        public abstract void SelectYourMove();
+        public abstract int SelectYourMove();
         public void PlayerWins()
         {
-            if (PlayerWinTally == 2)
+            if (playerWinTally == 2)
             {
                 Console.WriteLine("{0} wins", playerName);
             }

@@ -45,7 +45,7 @@ namespace RPSLizardSpock
            switch (beginGame)
             {
                 case "y":
-                    Game startGame = new Game(false, false, false);
+                    Game startGame = new Game();
                     break;
                 case "n":
                     QuitTheGame();

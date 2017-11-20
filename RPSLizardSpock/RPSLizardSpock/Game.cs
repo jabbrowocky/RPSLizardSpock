@@ -8,22 +8,20 @@ namespace RPSLizardSpock
 {
     public class Game 
     {
-        public bool playerOne;
-        public bool playerTwo;
-        public bool aiPlayer;
-        public Game(bool playerOne, bool playerTwo, bool aiPlayer)
+        public Player FirstPlayer;
+        public Player SecondPlayer;
+       
+        public Game()
         {
-            this.playerOne = playerOne;
-            this.playerTwo = playerTwo;
-            this.aiPlayer = aiPlayer;
+           
             GetPlayerTypes(GetNumberOfPlayers());
         }
         public string GetNumberOfPlayers()
         {
             string numberOfPlayers;
-            Console.WriteLine("Let's decide how many players we want:");
-            Console.WriteLine("For 1 player enter '1' or 2 players enter '2'?");
-            numberOfPlayers = Console.ReadKey().KeyChar.ToString();
+            Console.WriteLine("Let's decide how many players we want:\n");
+            Console.WriteLine("For 1 player enter '1' or for 2 players enter '2'?\n");
+            numberOfPlayers = Console.ReadKey(true).KeyChar.ToString();
             return numberOfPlayers;
 
         }
@@ -31,30 +29,46 @@ namespace RPSLizardSpock
         {
             if (numberOfPlayers == "1")
             {
-                playerOne = true;
-                aiPlayer = true;
-                Human FirstPlayer = new Human();
-                AI SecondPlayer = new AI();
+                FirstPlayer = new Human("Player 1");
+                SecondPlayer = new AI();
+                Console.Clear();
+                PlayGame();
 
             }
             else if (numberOfPlayers == "2")
             {
-                playerOne = true;
-                playerTwo = true;
-                Human FirstPlayer = new Human();
-                Human SecondPlayer = new Human();
+                FirstPlayer = new Human("Player 1");
+                SecondPlayer = new Human("Player 2");
+                Console.Clear();
+                PlayGame();
 
             }else
             {
-                Console.WriteLine("That is not a valid player input.");
+              
                 GetPlayerTypes(GetNumberOfPlayers());
 
             }
         }
-        public void GetGameLogic()
+        public void PlayGame()
         {
+            Console.WriteLine("Alright, let's start the game hombres!\n\n Press any key to continue.");
+            Console.ReadKey();
+            Console.WriteLine("'0' for Rock '1' for Paper '2' for Scissors '3' for Spock '4' for Lizard.\n");
+            Console.Clear();
+            DisplayKeys();
+            PlayRound();
 
+        }
+        public void DisplayKeys()
+        {
+            Console.WriteLine("'0' for Rock '1' for Paper '2' for Scissors '3' for Lizard '4' for Spock.\n");
+        }
+        public void PlayRound()
+        {
+            FirstPlayer.SelectYourMove();
+            SecondPlayer.SelectYourMove();
         }
 
     }
+        
 }

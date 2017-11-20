@@ -20,7 +20,8 @@ namespace RPSLizardSpock
         public override int SelectYourMove()
         {
             
-            return computerMove.Next(5);
+            playerMove = computerMove.Next(5);
+            return playerMove;
         }
     }
 }

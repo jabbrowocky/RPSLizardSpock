@@ -10,6 +10,7 @@ namespace RPSLizardSpock
     {
         public string playerName;
         public int playerChoice;
+        public int PlayerWinTally;
 
 
         public Player()
@@ -22,6 +23,14 @@ namespace RPSLizardSpock
             playerName = Console.ReadLine();
         }
         public abstract void SelectYourMove();
+        public void PlayerWins()
+        {
+            if (PlayerWinTally == 2)
+            {
+                Console.WriteLine("{0} wins", playerName);
+            }
+
+        }
 
     }
 }

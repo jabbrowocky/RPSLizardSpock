@@ -10,7 +10,7 @@ namespace RPSLizardSpock
     {
         static void Main(string[] args)
         {
-            
+            ruleset startGame = new ruleset();
         }
     }
 }

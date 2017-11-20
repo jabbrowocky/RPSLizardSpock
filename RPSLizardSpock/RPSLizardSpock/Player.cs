@@ -20,7 +20,7 @@ namespace RPSLizardSpock
         }
         virtual public void NameThePlayer()
         {
-            Console.WriteLine("{0} what is your name?", defaultHumanName);
+            Console.WriteLine("{0} what is your name?\n", defaultHumanName);
             playerName = Console.ReadLine();
         }
         public abstract int SelectYourMove();

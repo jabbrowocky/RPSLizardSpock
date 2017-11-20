@@ -10,6 +10,8 @@ namespace RPSLizardSpock
     {
         public Player FirstPlayer;
         public Player SecondPlayer;
+        int playerOneMove;
+        int playerTwoMove;
        
         public Game()
         {
@@ -53,22 +55,53 @@ namespace RPSLizardSpock
         {
             Console.WriteLine("Alright, let's start the game hombres!\n\n Press any key to continue.");
             Console.ReadKey();
-            Console.WriteLine("'0' for Rock '1' for Paper '2' for Scissors '3' for Spock '4' for Lizard.\n");
+            Console.WriteLine("'0' for Rock '1' for Paper '2' for Scissors '3' for Spock '4' for Lizard.\n\n");
             Console.Clear();
-            DisplayKeys();
-            PlayRound();
+            while (!(FirstPlayer.playerWinTally == 2 || SecondPlayer.playerWinTally == 2))
+            {
+                DisplayKeys();
+                PlayRound();
+            }
 
         }
         public void DisplayKeys()
         {
-            Console.WriteLine("'0' for Rock '1' for Paper '2' for Scissors '3' for Lizard '4' for Spock.\n");
+            Console.WriteLine("'0' for Rock '1' for Paper '2' for Scissors '3' for Spock '4' for Lizard.\n\n");
         }
         public void PlayRound()
         {
-            FirstPlayer.SelectYourMove();
-            SecondPlayer.SelectYourMove();
+            playerOneMove = FirstPlayer.SelectYourMove();
+            playerTwoMove = SecondPlayer.SelectYourMove();
+            CalculateRound();
         }
-
+        public void CalculateRound()
+        {
+            int roundDeterminator = (5 + playerOneMove - playerTwoMove) % 5;
+            if (roundDeterminator == 0)
+            {
+                Console.WriteLine("The round is a tie!\n");
+                Console.WriteLine("Press any key to continue\n");
+                Console.ReadKey();
+                Console.Clear();
+            }
+            else if (roundDeterminator == 1 || roundDeterminator == 3)
+            {
+                FirstPlayer.playerWinTally++;
+                Console.WriteLine("{0} wins.\n", FirstPlayer.playerName);
+                Console.WriteLine("Press any key to continue\n");
+                Console.ReadKey();
+                Console.Clear();
+            }
+            else if (roundDeterminator == 2 || roundDeterminator == 4)
+            {
+                SecondPlayer.playerWinTally++;
+                Console.WriteLine("{0} wins.\n", SecondPlayer.playerName);
+                Console.WriteLine("Press any key to continue\n");
+                Console.ReadKey();
+                Console.Clear();
+            }
+        }
+        public void DisplayResults 
     }
         
 }

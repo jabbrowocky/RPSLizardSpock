@@ -77,9 +77,9 @@ namespace RPSLizardSpock
         public void PlayRound()
         {
             playerOneMove = FirstPlayer.SelectPlayerMove();
-            playerOneInput = int.Parse(playerOneMove);
+            
             playerTwoMove = SecondPlayer.SelectPlayerMove();
-            playerTwoInput = int.Parse(playerTwoMove);
+            
             DisplayUserInputWords();
             CalculateRoundResults();
         }
@@ -122,7 +122,8 @@ namespace RPSLizardSpock
         {
             if (isTie == true)
             {
-                Console.WriteLine("{\n0} has tied {1}\n\nPress any key to continue", winner.playerName, loser.playerName);
+
+                Console.WriteLine("\n{0} has tied {1}.", winner.playerName, loser.playerName);
                 DisplayScore(FirstPlayer, SecondPlayer);
                 Console.ReadKey();
 
@@ -145,10 +146,12 @@ namespace RPSLizardSpock
         }
         public void GetUserInputWord()
         {
-          
+            playerOneInput = int.Parse(playerOneMove);
             userWordOne = GameElements[playerOneInput];
+            playerTwoInput = int.Parse(playerTwoMove);
             userWordTwo = GameElements[playerTwoInput];
             
+
         }
         public void DisplayUserInputWords()
         {

@@ -10,8 +10,10 @@ namespace RPSLizardSpock
     {
         public Player FirstPlayer;
         public Player SecondPlayer;
-        public int playerOneMove;
-        public int playerTwoMove;
+        public string playerOneMove;
+        public int playerOneInput;
+        public string playerTwoMove;
+        public int playerTwoInput;
         public string userWordOne;
         public string userWordTwo;
         public List<string> GameElements = new List<string>() { "Rock", "Paper", "Scissors", "Spock", "Lizard" };
@@ -74,25 +76,31 @@ namespace RPSLizardSpock
         }
         public void PlayRound()
         {
-            playerOneMove = FirstPlayer.SelectYourMove();
-            playerTwoMove = SecondPlayer.SelectYourMove();
-            GetUserInputWord();
+            playerOneMove = FirstPlayer.SelectPlayerMove();
+            playerOneInput = int.Parse(playerOneMove);
+            playerTwoMove = SecondPlayer.SelectPlayerMove();
+            playerTwoInput = int.Parse(playerTwoMove);
             DisplayUserInputWords();
             CalculateRoundResults();
         }
         public void CalculateRoundResults()
         {
-            int roundDeterminator = (5 + playerOneMove - playerTwoMove) % 5;
+            int roundDeterminator = (5 + playerOneInput - playerTwoInput) % 5;
             if (roundDeterminator == 0)
             {
                 DisplayRoundResult(FirstPlayer, SecondPlayer, true);
             }
             else if (roundDeterminator == 1 || roundDeterminator == 3)
             {
+              
+
+                DisplayUserInputPhrase(userWordOne, userWordTwo);
                 DisplayRoundResult(FirstPlayer, SecondPlayer, false);
             }
             else if (roundDeterminator == 2 || roundDeterminator == 4)
             {
+               
+                DisplayUserInputPhrase(userWordTwo, userWordOne);
                 DisplayRoundResult(SecondPlayer, FirstPlayer, false);
             }
         }
@@ -114,7 +122,7 @@ namespace RPSLizardSpock
         {
             if (isTie == true)
             {
-                Console.WriteLine("{0} has tied {1}\n\nPress any key to continue", winner.playerName, loser.playerName);
+                Console.WriteLine("{\n0} has tied {1}\n\nPress any key to continue", winner.playerName, loser.playerName);
                 DisplayScore(FirstPlayer, SecondPlayer);
                 Console.ReadKey();
 
@@ -122,7 +130,7 @@ namespace RPSLizardSpock
             }
             else
             {
-                Console.WriteLine("{0} has won the round.\n\nPress any key to continue.\n", winner.playerName);
+                Console.WriteLine("{0} has won the round.\n", winner.playerName);
                 winner.playerWinTally++;
                 DisplayScore(FirstPlayer, SecondPlayer);
                 Console.ReadKey();
@@ -133,23 +141,26 @@ namespace RPSLizardSpock
 
         public void DisplayScore(Player player1, Player player2)
         {
-            Console.WriteLine(player1.playerName + " has a score of " + player1.playerWinTally + " and " + player2.playerName + " has a score of " + player2.playerWinTally);
+            Console.WriteLine(player1.playerName + " has a score of " + player1.playerWinTally + " and " + player2.playerName + " has a score of " + player2.playerWinTally + "\nPress any key to continue.\n");
         }
         public void GetUserInputWord()
         {
           
-            userWordOne = GameElements[playerOneMove];
-            userWordTwo = GameElements[playerTwoMove];
+            userWordOne = GameElements[playerOneInput];
+            userWordTwo = GameElements[playerTwoInput];
             
         }
         public void DisplayUserInputWords()
         {
+            GetUserInputWord();
             Console.WriteLine("\n{0} has selected {1}", FirstPlayer.playerName, userWordOne);
             Console.WriteLine("{0} has selected {1}\n", SecondPlayer.playerName, userWordTwo);
         }
-        public void DisplayUserInputPhrase(Player winner, Player loser)
+        public void DisplayUserInputPhrase(string winnerInput, string loserInput)
         {
-            
+
+            string losingTerm = DisplayInteraction(winnerInput, loserInput);
+            Console.WriteLine(winnerInput + " " + losingTerm + " " + loserInput);
         }
         public string DisplayInteraction(string winnerWord,string loserWord)
         {

@@ -12,7 +12,7 @@ namespace RPSLizardSpock
         public string playerName;
         public int playerChoice;
         public int playerWinTally = 0;
-        public int playerMove;
+        public string playerMove;
 
 
         public Player()
@@ -24,7 +24,7 @@ namespace RPSLizardSpock
             Console.WriteLine("{0} what is your name?\n", defaultHumanName);
             playerName = Console.ReadLine();
         }
-        public abstract int SelectYourMove();
+        public abstract string SelectPlayerMove();
         
 
     }

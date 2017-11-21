@@ -17,10 +17,10 @@ namespace RPSLizardSpock
         {
             playerName = "Hal9000";
         }
-        public override int SelectYourMove()
+        public override string SelectPlayerMove()
         {
             
-            playerMove = computerMove.Next(5);
+            playerMove = computerMove.Next(5).ToString();
             return playerMove;
         }
     }

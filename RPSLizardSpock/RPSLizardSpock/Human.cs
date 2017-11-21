@@ -14,14 +14,14 @@ namespace RPSLizardSpock
             this.defaultHumanName = defaultHumanName;
             NameThePlayer();
         }
-        public override int SelectYourMove()
+        public override string SelectPlayerMove()
         {
             Console.WriteLine("{0} select your move.", playerName);
-            playerMove = int.Parse(Console.ReadKey(true).KeyChar.ToString());
-            if (!(playerMove == 0 || playerMove == 1 || playerMove == 2 || playerMove == 3 || playerMove == 4))
+            playerMove = Console.ReadKey(true).KeyChar.ToString();
+            if (!(playerMove == "0" || playerMove == "1" || playerMove == "2" || playerMove == "3" || playerMove == "4"))
             {
                 Console.Clear();
-                SelectYourMove();
+                SelectPlayerMove();
             }
             return playerMove;
         }

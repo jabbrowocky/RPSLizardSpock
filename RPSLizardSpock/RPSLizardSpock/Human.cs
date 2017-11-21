@@ -20,7 +20,7 @@ namespace RPSLizardSpock
             playerMove = Console.ReadKey(true).KeyChar.ToString();
             if (!(playerMove == "0" || playerMove == "1" || playerMove == "2" || playerMove == "3" || playerMove == "4"))
             {
-                Console.Clear();
+                
                 SelectPlayerMove();
             }
             return playerMove;

@@ -26,8 +26,15 @@ namespace RPSLizardSpock
         public string GetNumberOfPlayers()
         {
             string numberOfPlayers;
-            Console.WriteLine("Let's decide how many players we want:\n");
-            Console.WriteLine("For 1 player enter '1' or for 2 players enter '2'?\n");
+            Console.WriteLine("\nLet's decide how many players we want:\n");
+            Console.Write("For 1 player mode enter ");
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            Console.Write("1");
+            Console.ResetColor();
+            Console.Write(" or for 2 players enter ");
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.Write("2.\n");
+            Console.ResetColor();
             numberOfPlayers = Console.ReadKey(true).KeyChar.ToString();
             return numberOfPlayers;
 
@@ -60,7 +67,6 @@ namespace RPSLizardSpock
         {
             Console.WriteLine("Alright, let's start the game hombres!\n\n Press any key to continue.");
             Console.ReadKey();
-            Console.WriteLine("'0' for Rock '1' for Paper '2' for Scissors '3' for Spock '4' for Lizard.\n\n");
             Console.Clear();
             while (!(FirstPlayer.playerWinTally == 2 || SecondPlayer.playerWinTally == 2))
             {
@@ -72,14 +78,27 @@ namespace RPSLizardSpock
         }
         public void DisplayKeys()
         {
-            Console.WriteLine("'0' for Rock '1' for Paper '2' for Scissors '3' for Spock '4' for Lizard.\n\n");
+            for (int i = 0; i < GameElements.Count(); i ++ )
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write(i);
+                Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.Write(" for " + GameElements[i] + " ");
+                Console.ResetColor();
+            }
+            Console.WriteLine("\n\n");
+                        
         }
         public void PlayRound()
         {
+            
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             playerOneMove = FirstPlayer.SelectPlayerMove();
-            
+            Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.DarkRed;
             playerTwoMove = SecondPlayer.SelectPlayerMove();
-            
+            Console.ResetColor();
             DisplayUserInputWords();
             CalculateRoundResults();
         }
@@ -111,11 +130,13 @@ namespace RPSLizardSpock
             {
                 Console.WriteLine("{0} has won the game", FirstPlayer.playerName);
                 Console.ReadLine();
+                ResetOption();
             }
             if (SecondPlayer.playerWinTally == 2)
             {
                 Console.WriteLine("{0} has won the game", SecondPlayer.playerName);
                 Console.ReadLine();
+                ResetOption();
             }
         }
         public void DisplayRoundResult(Player winner, Player loser, bool isTie)
@@ -123,7 +144,7 @@ namespace RPSLizardSpock
             if (isTie == true)
             {
 
-                Console.WriteLine("\n{0} has tied {1}.", winner.playerName, loser.playerName);
+                Console.WriteLine("\n{0} has tied {1}\n.", winner.playerName, loser.playerName);
                 DisplayScore(FirstPlayer, SecondPlayer);
                 Console.ReadKey();
 
@@ -142,7 +163,10 @@ namespace RPSLizardSpock
 
         public void DisplayScore(Player player1, Player player2)
         {
-            Console.WriteLine(player1.playerName + " has a score of " + player1.playerWinTally + " and " + player2.playerName + " has a score of " + player2.playerWinTally + "\nPress any key to continue.\n");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(player1.playerName + " has a score of " + player1.playerWinTally + " and " + player2.playerName + " has a score of " + player2.playerWinTally);
+            Console.ResetColor();
+            Console.WriteLine("\n\nPress any key to continue.\n");
         }
         public void GetUserInputWord()
         {
@@ -211,7 +235,34 @@ namespace RPSLizardSpock
 
             return losingTerm;
         }
-       
+        public void ResetOption()
+        {
+            Console.WriteLine("\nWould you like to Play again?\n");
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.Write(" Y");
+            Console.ResetColor();
+            Console.Write(" or ");
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.Write("N\n");
+            Console.ResetColor();
+            string ResetInput;
+            ResetInput = Console.ReadKey(true).KeyChar.ToString();
+
+            if (!(ResetInput == "y" || ResetInput == "n"))
+            {
+                 ResetOption();
+            }
+            else if (ResetInput == "y")
+            {
+                Console.WriteLine("\n");
+                Game NextGame = new Game();
+            }
+            else
+            {
+                return;
+            }
+        }
+
     }
-        
+
 }
